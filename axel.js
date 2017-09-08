@@ -112,7 +112,7 @@ function createLights() {
 
 // Sea 1 start
 Sea1 = function(){
-    var geom = new THREE.CylinderGeometry(600,600,800,40,10);
+    var geom = new THREE.CylinderGeometry(600,600,700,50,40);
     geom.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI/2));
     geom.mergeVertices();
     var l = geom.vertices.length;
@@ -128,9 +128,9 @@ Sea1 = function(){
         });
     }
     var mat = new THREE.MeshPhongMaterial({
-        color:"#0099ff",
-        transparent:true,
-        opacity:.6,
+        color:"#000066",
+        //transparent:true,
+        opacity:.9,
         flatShading  :THREE.FlatShading
     });
     this.mesh = new THREE.Mesh(geom, mat);
@@ -150,14 +150,113 @@ Sea1.prototype.moveWaves = function (){
     this.mesh.geometry.verticesNeedUpdate=true;
     sea1.mesh.rotation.z += .005;
 };
+// Sea 1 end
+
+// Sea 2 start
+Sea2 = function(){
+    var geom = new THREE.CylinderGeometry(600,600,200,50,10);
+    geom.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI/2));
+    geom.mergeVertices();
+    var l = geom.vertices.length;
+    this.waves = [];
+    for (var i=0; i<l; i++){
+        var v = geom.vertices[i];
+        this.waves.push({y:v.y,
+            x:v.x,
+            z:v.z,
+            ang:Math.random()*Math.PI*2,
+            amp:5 + Math.random()*15,
+            speed:0.016 + Math.random()*0.032
+        });
+    }
+    var mat = new THREE.MeshPhongMaterial({
+        color:"#0033ff",
+        //transparent:true,
+        opacity:.9,
+        flatShading  :THREE.FlatShading
+    });
+    this.mesh = new THREE.Mesh(geom, mat);
+    this.mesh.receiveShadow = true;
+};
+
+Sea2.prototype.moveWaves = function (){
+    var verts = this.mesh.geometry.vertices;
+    var l = verts.length;
+    for (var i=0; i<l; i++){
+        var v = verts[i];
+        var vprops = this.waves[i];
+        v.x = vprops.x + Math.cos(vprops.ang)*vprops.amp;
+        v.y = vprops.y + Math.sin(vprops.ang)*vprops.amp;
+        vprops.ang += vprops.speed;
+    }
+    this.mesh.geometry.verticesNeedUpdate=true;
+    sea2.mesh.rotation.z += .005;
+};
+// Sea 2 end
+
+// Sea 3 start
+Sea3 = function(){
+    var geom = new THREE.CylinderGeometry(600,600,200,50,10);
+    geom.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI/2));
+    geom.mergeVertices();
+    var l = geom.vertices.length;
+    this.waves = [];
+    for (var i=0; i<l; i++){
+        var v = geom.vertices[i];
+        this.waves.push({y:v.y,
+            x:v.x,
+            z:v.z,
+            ang:Math.random()*Math.PI*2,
+            amp:5 + Math.random()*15,
+            speed:0.016 + Math.random()*0.032
+        });
+    }
+    var mat = new THREE.MeshPhongMaterial({
+        color:"#0099ff",
+        transparent:true,
+        opacity:.9,
+        flatShading  :THREE.FlatShading
+    });
+    this.mesh = new THREE.Mesh(geom, mat);
+    this.mesh.receiveShadow = true;
+};
+
+Sea3.prototype.moveWaves = function (){
+    var verts = this.mesh.geometry.vertices;
+    var l = verts.length;
+    for (var i=0; i<l; i++){
+        var v = verts[i];
+        var vprops = this.waves[i];
+        v.x = vprops.x + Math.cos(vprops.ang)*vprops.amp;
+        v.y = vprops.y + Math.sin(vprops.ang)*vprops.amp;
+        vprops.ang += vprops.speed;
+    }
+    this.mesh.geometry.verticesNeedUpdate=true;
+    sea3.mesh.rotation.z += .005;
+};
+// Sea 3 end
 
 var sea1;
+var sea2;
+var sea3;
 function createSea(){
+
     sea1 = new Sea1();
     sea1.mesh.position.y = -600;
+    sea1.mesh.position.z = 300;
+
+    sea2 = new Sea2();
+    sea2.mesh.position.y = -600;
+    sea2.mesh.position.z = -150;
+
+    sea3 = new Sea3();
+    sea3.mesh.position.y = -600;
+    sea3.mesh.position.z = -350;
+
     scene.add(sea1.mesh);
+    scene.add(sea2.mesh);
+    //scene.add(sea3.mesh);
 }
-// Sea 1 end
 
 Cloud = function(){
     // Create an empty container that will hold the different parts of the cloud
@@ -366,6 +465,10 @@ function loop(){
 
     sea1.mesh.rotation.z += .003;
     sea1.moveWaves();
+    sea2.mesh.rotation.z += .003;
+    sea2.moveWaves();
+    sea3.mesh.rotation.z += .003;
+    sea3.moveWaves();
 
     airplane.propeller.rotation.x += 0.3;
     updatePlane();
