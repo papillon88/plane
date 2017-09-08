@@ -130,7 +130,7 @@ Sea1 = function(){
     var mat = new THREE.MeshPhongMaterial({
         color:"#000066",
         //transparent:true,
-        opacity:.9,
+        opacity:1,
         flatShading  :THREE.FlatShading
     });
     this.mesh = new THREE.Mesh(geom, mat);
@@ -154,7 +154,7 @@ Sea1.prototype.moveWaves = function (){
 
 // Sea 2 start
 Sea2 = function(){
-    var geom = new THREE.CylinderGeometry(600,600,200,50,10);
+    var geom = new THREE.CylinderGeometry(600,600,10,50,10);
     geom.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI/2));
     geom.mergeVertices();
     var l = geom.vertices.length;
@@ -247,15 +247,15 @@ function createSea(){
 
     sea2 = new Sea2();
     sea2.mesh.position.y = -600;
-    sea2.mesh.position.z = -150;
+    sea2.mesh.position.z = -100;
 
     sea3 = new Sea3();
     sea3.mesh.position.y = -600;
-    sea3.mesh.position.z = -350;
+    sea3.mesh.position.z = -220;
 
     scene.add(sea1.mesh);
     scene.add(sea2.mesh);
-    //scene.add(sea3.mesh);
+    scene.add(sea3.mesh);
 }
 
 Cloud = function(){
