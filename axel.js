@@ -59,7 +59,7 @@ var game = {speed:0,
     coinLastSpawn:0,
     distanceForCoinsSpawn:100,
 
-    ennemyDistanceTolerance:10,
+    ennemyDistanceTolerance:20,
     ennemyValue:10,
     ennemiesSpeed:.6,
     ennemyLastSpawn:0,
@@ -81,8 +81,13 @@ var newTime = new Date().getTime();
 var oldTime = new Date().getTime();
 
 var ennemiesPool = [],ennemiesInUse = [];
+var particlesPool = [];
 
 var ennemiesHolder;
+
+var ennemyHolderMeshPosition = -400;
+
+var colors = ["Colors.red", "Colors.blue", "Colors.green"];
 
 window.addEventListener('load', init, false);
 
@@ -93,6 +98,7 @@ function init(event) {
     createSky();
     createPlane();
     createEnnemies();
+    createParticles();
     document.addEventListener('mousemove', handleMouseMove, false);
     loop();
 }
@@ -267,6 +273,16 @@ function createEnnemies(){
     scene.add(ennemiesHolder.mesh)
 }
 
+function createParticles(){
+    for (var i=0; i<10; i++){
+        var particle = new Particle();
+        particlesPool.push(particle);
+    }
+    particlesHolder = new ParticlesHolder();
+    //ennemiesHolder.mesh.position.y = -game.seaRadius;
+    scene.add(particlesHolder.mesh)
+}
+
 function handleMouseMove(event) {
     var tx = -1 + (event.clientX / WIDTH)*2;
     var ty = 1 - (event.clientY / HEIGHT)*2;
@@ -296,11 +312,27 @@ function updateDistance(){
     game.distance += game.baseSpeed*deltaTime*game.ratioSpeedDistance;
 }
 
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+function getDistanceUsingVectors(vect1, vect2) {
+    var dx = vect1.x - vect2.x;
+    var dy = vect1.y - vect2.y;
+    var dz = vect1.z - vect2.z;
+    return Math.sqrt(dx*dx+dy*dy+dz*dz);
+}
+
 
 Ennemy = function(){
     var geom = new THREE.TetrahedronGeometry(8,2);
     var mat = new THREE.MeshPhongMaterial({
-        color:Colors.red,
+        color:getRandomColor(),
         shininess:0,
         specular:0xffffff,
         flatShading:THREE.FlatShading
@@ -313,11 +345,10 @@ Ennemy = function(){
 
 EnnemiesHolder = function (){
     this.mesh = new THREE.Object3D();
-    this.mesh.position.set(0,-400,0);
+    this.mesh.position.set(0,ennemyHolderMeshPosition,0);
     var e = new Ennemy();
     this.mesh.add(e.mesh);
 };
-
 
 EnnemiesHolder.prototype.spawnEnnemies = function(){
     var ennemy = new Ennemy();
@@ -325,8 +356,6 @@ EnnemiesHolder.prototype.spawnEnnemies = function(){
     ennemy.distance = 480 + 80*Math.random();
     ennemy.mesh.position.y = Math.sin(ennemy.angle)*ennemy.distance;
     ennemy.mesh.position.x = Math.cos(ennemy.angle)*ennemy.distance;
-    //ennemy.mesh.position.y = 90; //80 to 150
-    //ennemy.mesh.position.x = 0;
     ennemiesInUse.push(ennemy);
     this.mesh.add(ennemy.mesh);
     console.log("ennemies in use length "+ennemiesInUse.length);
@@ -339,13 +368,89 @@ EnnemiesHolder.prototype.rotateEnnemies = function(){
 
         if (ennemy.angle > Math.PI*2)
             ennemy.angle -= Math.PI*2;
+        /*if(ennemy.angle > Math.PI){
+            ennemiesInUse.splice(i,1);
+            this.mesh.remove(ennemy.mesh);
+        }*/
 
         ennemy.mesh.position.y = Math.sin(ennemy.angle)*ennemy.distance;
         ennemy.mesh.position.x = Math.cos(ennemy.angle)*ennemy.distance;
         ennemy.mesh.rotation.z += Math.random()*.1;
         ennemy.mesh.rotation.y += Math.random()*.1;
+
+
+        var vectorEnnemy = new THREE.Vector3();
+        vectorEnnemy.setFromMatrixPosition( ennemy.mesh.matrixWorld );
+
+        var vectorAirplane = new THREE.Vector3();
+        vectorAirplane.setFromMatrixPosition( airplane.mesh.matrixWorld );
+
+
+        if (getDistanceUsingVectors(vectorEnnemy,vectorAirplane)<game.ennemyDistanceTolerance) {
+            this.mesh.remove(ennemy.mesh);
+            ennemiesInUse.splice(i,1);
+        }
     }
 };
+
+
+
+Particle = function(){
+    var geom = new THREE.TetrahedronGeometry(3,0);
+    var mat = new THREE.MeshPhongMaterial({
+        color:0x009999,
+        shininess:0,
+        specular:0xffffff,
+        shading:THREE.FlatShading
+    });
+    this.mesh = new THREE.Mesh(geom,mat);
+};
+
+Particle.prototype.explode = function(pos, color, scale){
+    var _this = this;
+    var _p = this.mesh.parent;
+    this.mesh.material.color = new THREE.Color( color);
+    this.mesh.material.needsUpdate = true;
+    this.mesh.scale.set(scale, scale, scale);
+    var targetX = pos.x + (-1 + Math.random()*2)*50;
+    var targetY = pos.y + (-1 + Math.random()*2)*50;
+    var speed = .6+Math.random()*.2;
+    TweenMax.to(this.mesh.rotation, speed, {x:Math.random()*12, y:Math.random()*12});
+    TweenMax.to(this.mesh.scale, speed, {x:.1, y:.1, z:.1});
+    TweenMax.to(this.mesh.position, speed, {x:targetX, y:targetY, delay:Math.random() *.1, ease:Power2.easeOut, onComplete:function(){
+        if(_p) _p.remove(_this.mesh);
+        _this.mesh.scale.set(1,1,1);
+        particlesPool.unshift(_this);
+    }});
+};
+
+ParticlesHolder = function (){
+    this.mesh = new THREE.Object3D();
+    this.particlesInUse = [];
+};
+
+ParticlesHolder.prototype.spawnParticles = function(pos, density, color, scale){
+
+    var nPArticles = density;
+    for (var i=0; i<nPArticles; i++){
+        var particle;
+        if (particlesPool.length) {
+            particle = particlesPool.pop();
+        }else{
+            particle = new Particle();
+        }
+        this.mesh.add(particle.mesh);
+        particle.mesh.visible = true;
+        var _this = this;
+        particle.mesh.position.y = pos.y;
+        particle.mesh.position.x = pos.x;
+        particle.explode(pos,color, scale);
+    }
+};
+
+
+
+
 
 // Sea 1 start
 Sea1 = function(){
@@ -477,9 +582,10 @@ Sea3.prototype.moveWaves = function (){
 Cloud = function(){
 
     this.mesh = new THREE.Object3D();
-    var geom = new THREE.BoxGeometry(20,20,20);
+    //var geom = new THREE.BoxGeometry(20,20,20);
+    var geom = new THREE.TetrahedronGeometry(40,2);
     var mat = new THREE.MeshPhongMaterial({
-        color:Colors.white
+        color:Colors.grey
     });
     var nBlocs = 3+Math.floor(Math.random()*3);
     for (var i=0; i<nBlocs; i++ ){
