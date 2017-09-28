@@ -674,7 +674,7 @@ var Pilot = function(){
 
     var hairBackGeom = new THREE.BoxGeometry(2,8,10);
     var hairBack = new THREE.Mesh(hairBackGeom, hairMat);
-    hairBack.position.set(-1,-4,0)
+    hairBack.position.set(-1,-4,0);
     hairs.add(hairBack);
     hairs.position.set(-5,5,0);
 
@@ -685,7 +685,7 @@ var Pilot = function(){
     var glassR = new THREE.Mesh(glassGeom,glassMat);
     glassR.position.set(6,0,3);
     var glassL = glassR.clone();
-    glassL.position.z = -glassR.position.z
+    glassL.position.z = -glassR.position.z;
 
     var glassAGeom = new THREE.BoxGeometry(11,1,11);
     var glassA = new THREE.Mesh(glassAGeom, glassMat);
