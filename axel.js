@@ -330,13 +330,15 @@ function getDistanceUsingVectors(vect1, vect2) {
 
 
 Ennemy = function(){
+    var someRandomColor = getRandomColor();
     var geom = new THREE.TetrahedronGeometry(8,2);
     var mat = new THREE.MeshPhongMaterial({
-        color:getRandomColor(),
+        color:someRandomColor,
         shininess:0,
         specular:0xffffff,
         flatShading:THREE.FlatShading
     });
+    this.color = someRandomColor;
     this.mesh = new THREE.Mesh(geom,mat);
     this.mesh.castShadow = true;
     this.angle = Math.PI/2;
@@ -387,6 +389,7 @@ EnnemiesHolder.prototype.rotateEnnemies = function(){
 
 
         if (getDistanceUsingVectors(vectorEnnemy,vectorAirplane)<game.ennemyDistanceTolerance) {
+            particlesHolder.spawnParticles(vectorEnnemy, 15, ennemy.color, 3);
             this.mesh.remove(ennemy.mesh);
             ennemiesInUse.splice(i,1);
         }
@@ -401,7 +404,7 @@ Particle = function(){
         color:0x009999,
         shininess:0,
         specular:0xffffff,
-        shading:THREE.FlatShading
+        flatShading:THREE.FlatShading
     });
     this.mesh = new THREE.Mesh(geom,mat);
 };
