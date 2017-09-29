@@ -301,11 +301,24 @@ function normalize(v,vmin,vmax,tmin, tmax){
 function updatePlanePosition(){
     var targetX = normalize(mousePos.x, -1, 1, -100, 100);
     var targetY = normalize(mousePos.y, -1, 1, 25, 175);
+
+    game.planeCollisionDisplacementX += game.planeCollisionSpeedX;
+    targetX += game.planeCollisionDisplacementX;
+    game.planeCollisionDisplacementY += game.planeCollisionSpeedY;
+    targetY += game.planeCollisionDisplacementY;
+
     airplane.mesh.position.x = -70;
+    airplane.mesh.position.x += (targetX-airplane.mesh.position.x)*0.01;
     airplane.mesh.position.y += (targetY-airplane.mesh.position.y)*0.1;
     airplane.mesh.rotation.x = (airplane.mesh.position.y-targetY)*0.0064;
     airplane.mesh.rotation.z = (targetY-airplane.mesh.position.y)*0.0128;
     airplane.propeller.rotation.x += 0.3;
+
+
+    game.planeCollisionSpeedX += (0-game.planeCollisionSpeedX)*deltaTime * 0.03;
+    game.planeCollisionDisplacementX += (0-game.planeCollisionDisplacementX)*deltaTime *0.01;
+    game.planeCollisionSpeedY += (0-game.planeCollisionSpeedY)*deltaTime * 0.03;
+    game.planeCollisionDisplacementY += (0-game.planeCollisionDisplacementY)*deltaTime *0.006;
 }
 
 function updateDistance(){
@@ -387,10 +400,12 @@ EnnemiesHolder.prototype.rotateEnnemies = function(){
         var vectorAirplane = new THREE.Vector3();
         vectorAirplane.setFromMatrixPosition( airplane.mesh.matrixWorld );
 
-
-        if (getDistanceUsingVectors(vectorEnnemy,vectorAirplane)<game.ennemyDistanceTolerance) {
+        var d = getDistanceUsingVectors(vectorEnnemy,vectorAirplane);
+        if (d<game.ennemyDistanceTolerance) {
             particlesHolder.spawnParticles(vectorEnnemy, 15, ennemy.color, 3);
             this.mesh.remove(ennemy.mesh);
+            game.planeCollisionSpeedX = 100 * Math.abs(vectorEnnemy.x - vectorAirplane.x) / d;
+            game.planeCollisionSpeedY = 20 * Math.abs(vectorEnnemy.y - vectorAirplane.y) / d;
             ennemiesInUse.splice(i,1);
         }
     }
