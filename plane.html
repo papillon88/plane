@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Plane</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href='https://fonts.googleapis.com/css?family=Amatic SC' rel='stylesheet'>
+
+    <script type="text/javascript" src="three.js"></script>
+    <script type="text/javascript" src="axel.js"></script>
+    <!--<script type="text/javascript" src="game.js"></script>-->
+    <script type="text/javascript" src="TweenMax.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <style>
+
+        body {
+            font-family: 'Amatic SC',cursive;
+        }
+
+        .game-holder{
+            position: absolute;
+            border-style: solid;
+            border-width: 5px;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(#e4e0ba, #f7d9aa);
+        }
+        .world {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 20;
+        }
+        .header h1 {
+            font-family: 'Amatic SC',cursive;
+            font-size: 12.5vw;
+            font-weight: bold;
+            line-height: 1;
+            margin: 0;
+            letter-spacing: -0.025em;
+            color: darkgoldenrod;
+        }
+        .header h1 span {
+            font-size: 0.2em;
+            font-style: italic;
+            display: block;
+            margin: 0 0 -1em 9em;
+            letter-spacing: 0;
+        }
+        .header {
+            position: absolute;
+            top: 7vh;
+            left: -35vw;
+            width: 100%;
+            text-align: center;
+            pointer-events: none;
+            z-index: 100;
+        }
+        .message {
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            text-transform: uppercase;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .message--replay {
+            font-family: 'Amatic SC',cursive;
+            bottom: 50vh;
+            font-weight: 900;
+            font-size: 2vw;
+            left: 3vw;
+            display: none;
+            text-indent: 0.5em;
+            letter-spacing: 0.5em;
+            color: darkgoldenrod;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="game-holder">
+            <div class="header">
+                <h1><span>me</span>About</h1>
+            </div>
+            <div class="world" id="world"></div>
+            <div class="message message--replay" id="replayMessage">Click to resume</div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

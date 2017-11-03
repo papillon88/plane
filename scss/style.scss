@@ -1,0 +1,332 @@
+// Extra small screen / phone
+$screen-xs-min: 480px;
+
+// Small screen / tablet
+$screen-sm-min: 768px;
+
+// Medium screen / desktop
+$screen-md-min: 992px;
+
+// Large screen / wide desktop
+$screen-lg-min: 1200px;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-sm-max: ($screen-md-min - 1);
+$screen-md-max: ($screen-lg-min - 1);
+
+@mixin respondTo($media) {
+  @if $media == "xs" {
+    @media only screen and (max-width: $screen-xs-max) {
+      @content;
+    }
+  }
+
+  @else if $media == "sm" {
+    @media only screen and (max-width: $screen-sm-max) and (min-width: $screen-sm-min) {
+      @content;
+    }
+  }
+
+  @else if $media == "md" {
+    @media only screen and (max-width: $screen-md-max) and (min-width: $screen-md-min) {
+      @content;
+    }
+  }
+
+  @else if $media == "lg" {
+    @media only screen and (min-width: $screen-lg-min) {
+      @content;
+    }
+  }
+}
+@mixin respondToAbove($media) {
+  @if $media == "xs" {
+    @media only screen and (min-width: $screen-xs-max) {
+      @content;
+    }
+  }
+
+  @else if $media == "sm" {
+    @media only screen and (min-width: $screen-sm-min) {
+      @content;
+    }
+  }
+
+  @else if $media == "md" {
+    @media only screen and (min-width: $screen-md-min) {
+      @content;
+    }
+  }
+
+  @else if $media == "lg" {
+    @media only screen and (min-width: $screen-lg-min) {
+      @content;
+    }
+  }
+}
+@mixin respondToBelow($media) {
+  @if $media == "xs" {
+    @media only screen and (max-width: $screen-xs-max) {
+      @content;
+    }
+  }
+
+  @else if $media == "sm" {
+    @media only screen and (max-width: $screen-sm-max) {
+      @content;
+    }
+  }
+
+  @else if $media == "md" {
+    @media only screen and (max-width: $screen-md-max) {
+      @content;
+    }
+  }
+
+  @else if $media == "lg" {
+    @media only screen {
+      @content;
+    }
+  }
+}
+@mixin respondToTablet {
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
+    @content;
+  }
+}
+@mixin respondToSmall-n-Medium {
+  @media (min-width: $screen-sm-min) and (max-width: $screen-md-max){
+    @content;
+  }
+}
+@mixin respondToMobile() {
+  @include respondTo(xs){
+    @content
+      }
+}
+@mixin respondToDesktop() {
+  @include respondToAbove(md){
+    @content
+      }
+}
+
+@mixin close-icon{
+  font-size: 0 !important;
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  right: 20px;
+  top: 20px;   
+  font-size: 0px;
+  cursor: pointer;
+  z-index: 9;
+  border: 0;
+  background: transparent;
+  &:before,&:after{
+    content: '';
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    height: 2px;
+    background: #fff;
+    width: 50%;
+    transition: all .25s;
+    opacity: 0;
+  }
+  &:before{
+    transform: rotate(45deg);
+    opacity: 1;
+  }
+  &:after{
+    transform: rotate(-45deg);
+    opacity: 1;
+  }
+}
+@mixin radio-button{
+  display: none;
+  & + *{
+    position: relative;
+    padding-left: 30px;
+    margin-left: 10px;
+    &:before{
+      content: '';
+      width: 20px;
+      @include rounded_corners(50%);
+      height: 20px;
+      @include box-shadow(inset 0px 1px 5px rgba(0,0,0,0.5));
+      text-indent: 30px;
+      left: 0;
+      top: 0;
+      position: absolute;
+      cursor: pointer;
+    }
+    &:after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      position: absolute;
+      z-index: 1;
+      background: $dbc;
+      @include rounded_corners(50%);
+      @include transition(all .25s);
+      top: 0;
+      left: 0;
+      @include transform(scale(0));
+    }
+  }
+  &:checked + *:after {
+    @include transform(scale(.4));
+    @include transition(all .25s cubic-bezier(0.68,0.55,0.265,3));
+  }
+}
+@mixin check-box{
+  display: none;
+  & + *{
+    position: relative;
+    padding-left: 30px;
+    margin-left: 10px;
+    &:before{
+      content: '';
+      width: 18px;
+      height: 18px;
+      @include box-shadow(inset 0px 1px 5px rgba(0,0,0,0.5));
+      text-indent: 30px;
+      left: 0;
+      top: 0;
+      position: absolute;
+      cursor: pointer;
+    }
+    &:after {
+      content: '';
+      width: 25px;
+      height: 15px;
+      cursor: pointer;
+      position: absolute;
+      z-index: 1;            
+      border: solid $solid-color;
+      border-width: 0 0 7px 7px;
+      top: 0;
+      left: -3px;
+      @include transform(rotate(0deg) scale(0));
+      @include transition(all .25s);
+    }
+  }
+  &:checked + *:after {
+    @include transform(rotate(-45deg) scale(0.4));
+    @include transition(all .25s cubic-bezier(0.68,0.55,0.265,3));
+  }
+  &:checked + *:before {
+    background: $dbc;
+  }
+}
+
+@mixin calwidth($val1, $val2){
+  width: calc(#{$val1} + #{$val2})
+}
+
+@mixin transition-hvr($t-duration, $t-type){
+  position: relative;
+  transition: all $t-duration $t-type;
+  &:before,&:after{       
+    content:'';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width:0;
+    height:0;
+    transition: width $t-duration ($t-duration*3) $t-type, height $t-duration ($t-duration*2) $t-type, border ($t-duration/5) ($t-duration*4) $t-type;
+    border: solid transparent;
+    border-width: 3px 3px 0 0;
+  }
+  &:after{
+    left: auto;
+    top: auto;
+    bottom: 0;
+    right: 0;
+    transition: width  $t-duration $t-duration $t-type, height $t-duration $t-type, border ($t-duration/5) ($t-duration*2) $t-type;
+    border-width: 0 0 3px 3px;
+  }
+  &:hover{
+    &:before,&:after{
+      transition: width $t-duration $t-type, height $t-duration $t-duration $t-type, border ($t-duration/5) $t-type;
+      width: 100%;
+      height: 100%;         
+      border-color: $dbc;
+    }
+    &:after{
+      transition: width $t-duration ($t-duration*2) $t-type, height $t-duration ($t-duration*3)  $t-type, border ($t-duration/5) ($t-duration*2) $t-type;       
+    }
+  }
+}
+$shadow : 0 6px 10px -2px rgba(0, 0, 0, .25);
+$solid: #ffc107;
+$dbc: #3D5A68;
+#body {
+  @include respondToAbove(sm){
+  padding: 1px;
+  }
+      @include respondTo(xs){
+  padding: 1px;
+  }
+  background: $dbc;
+  min-height: 150vh;
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: captalize;
+  letter-spacing: 2px;
+  &, & *{
+    transition: all .25s;
+  }
+  .out-wrap {
+        position: relative;
+        padding: 30px;
+        box-shadow: 0 6px 10px -2px rgba(0, 0, 0, .25);
+        width: 400px;
+        margin: 50px auto;
+        background: $solid;
+    #tabs{
+      border-bottom: 0;
+      margin: 0 -50px 20px;
+      background: #303030;
+        display: flex;
+        overflow-x: scroll;
+    overflow-y: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,.5);
+    flex-wrap: nowrap !important;
+        &::-webkit-scrollbar{
+          display: none;
+        }
+        li{
+              width: auto;
+    white-space: nowrap;
+    flex: 1 ;
+          a{
+            border: 0;
+            border-radius: 0;
+            cursor: pointer;
+            margin:0;
+          color: #fff;
+            text-transform: uppercase;
+            &:hover{
+              
+            background: #ddd;
+              color: #303030;
+            }
+        }
+          &.active {
+            a{              
+            background: #fff;
+              color: $dbc;
+            }
+          }
+      }
+      }
+    .tab-content{
+      overflow: hidden !important;
+    }
+    }
+}

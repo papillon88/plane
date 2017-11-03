@@ -1,0 +1,71 @@
+#body {
+  background: linear-gradient(#e4e0ba, #f7d9aa);
+  border-style: solid;
+  border-width: 5px;
+  height:100%;
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: captalize;
+  letter-spacing: 2px;
+}
+@media only screen and (min-width: 768px) {
+  #body {
+    padding: 1px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  #body {
+    padding: 1px;
+  }
+}
+#body, #body * {
+  transition: all .25s;
+}
+#body .out-wrap {
+  position: relative;
+  padding: 30px;
+  box-shadow: 0 6px 10px -2px rgba(0, 0, 0, 0.25);
+  width: 80%;
+  margin: 50px auto;
+  background: #ffc107;
+}
+#body .out-wrap #tabs {
+  border-bottom: 0;
+  margin: 0 -50px 20px;
+  background: #303030;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  flex-wrap: nowrap !important;
+}
+#body .out-wrap #tabs::-webkit-scrollbar {
+  display: none;
+}
+#body .out-wrap #tabs li {
+  width: auto;
+  white-space: nowrap;
+  flex: 1;
+}
+#body .out-wrap #tabs li a {
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  margin: 0;
+  color: #fff;
+  text-transform: uppercase;
+}
+#body .out-wrap #tabs li a:hover {
+  background: #ddd;
+  color: #303030;
+}
+#body .out-wrap #tabs li.active a {
+  background: #fff;
+  color: #3D5A68;
+}
+#body .out-wrap .tab-content {
+  overflow: hidden !important;
+}
+
+.tab-pane{
+  height: 65vh;
+}

@@ -1,22 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
     <title>Plane</title>
-    <script type="text/javascript" src="three.js"></script>
-    <script type="text/javascript" src="axel.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
-        #world {
-            position: absolute;
-            width: 100%;
+        #panel{
+            position: fixed;
+            right: 0;
+            width: 35%;
             height: 100%;
             overflow: hidden;
-            background: linear-gradient(#e4e0ba, #f7d9aa);
         }
+        #viewer{
+            position: absolute;
+            border: 0;
+            left: 0;
+            width: 65%;
+            height: 100%;
+            overflow: hidden;
+        }
+
     </style>
+    <script>
+        function openTab(tabColor) {
+            var i, tablinks;
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+                tablinks[i].className = tablinks[i].className.replace(" w3-purple", "");
+                tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
+                tablinks[i].className = tablinks[i].className.replace(" w3-blue", "");
+                tablinks[i].className = tablinks[i].className.replace(" w3-yellow", "");
+                tablinks[i].className = tablinks[i].className.replace(" w3-black", "");
+            }
+            document.getElementById(tabColor).style.display = "block";
+
+            switch (tabColor){
+                case 'red' :
+                    document.getElementById('red').className += " w3-red";
+                    document.getElementById('red').click();
+                    break;
+                case 'purple' :
+                    document.getElementById('purple').className += " w3-purple";
+                    document.getElementById('purple').click();
+                    break;
+                case 'green' :
+                    document.getElementById('green').className += " w3-green";
+                    document.getElementById('green').click();
+                    break;
+                case 'blue' :
+                    document.getElementById('blue').className += " w3-blue";
+                    document.getElementById('blue').click();
+                    break;
+                case 'yellow' :
+                    document.getElementById('yellow').className += " w3-yellow";
+                    document.getElementById('yellow').click();
+                    break;
+                case 'black' :
+                    document.getElementById('black').className += " w3-black";
+                    document.getElementById('black').click();
+                    break;
+            }
+        }
+        function openTabFromClick(tabColor) {
+            var i, tablinks;
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+                tablinks[i].className = tablinks[i].className.replace(" w3-purple", "");
+                tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
+                tablinks[i].className = tablinks[i].className.replace(" w3-blue", "");
+                tablinks[i].className = tablinks[i].className.replace(" w3-yellow", "");
+                tablinks[i].className = tablinks[i].className.replace(" w3-black", "");
+            }
+            document.getElementById(tabColor).style.display = "block";
+
+            switch (tabColor){
+                case 'red' :
+                    document.getElementById('red').className += " w3-red";
+                    break;
+                case 'purple' :
+                    document.getElementById('purple').className += " w3-purple";
+                    break;
+                case 'green' :
+                    document.getElementById('green').className += " w3-green";
+                    break;
+                case 'blue' :
+                    document.getElementById('blue').className += " w3-blue";
+                    break;
+                case 'yellow' :
+                    document.getElementById('yellow').className += " w3-yellow";
+                    break;
+                case 'black' :
+                    document.getElementById('black').className += " w3-black";
+                    break;
+            }
+        }
+
+    </script>
 </head>
 <body>
-<div id="world"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://use.fontawesome.com/aa95071b26.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div id="panel">
+    <div id="body">
+        <div class="out-wrap">
+            <ul id="tabs" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" id="red" aria-controls="home" role="tab" data-toggle="tab" class="tablink w3-red" onclick="openTabFromClick('red')">Home</a></li>
+                <li role="presentation"><a href="#profile" id="purple" aria-controls="profile" role="tab" data-toggle="tab" class="tablink" onclick="openTabFromClick('purple')">Profile</a></li>
+                <li role="presentation"><a href="#messages" id="green" aria-controls="messages" role="tab" data-toggle="tab" class="tablink" onclick="openTabFromClick('green')">Messages</a></li>
+                <li role="presentation"><a href="#settings" id="blue" aria-controls="settings" role="tab" data-toggle="tab" class="tablink" onclick="openTabFromClick('blue')">Settings</a></li>
+                <li role="presentation"><a href="#about" id="yellow" aria-controls="about" role="tab" data-toggle="tab" class="tablink" onclick="openTabFromClick('yellow')">About</a></li>
+                <li role="presentation"><a href="#foryou" id="black" aria-controls="foryou" role="tab" data-toggle="tab" class="tablink" onclick="openTabFromClick('black')">For You</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home" >Lorem ipsum dolor sit amet, id pede etiam, ultricies nunc torquent luctus, vel vivamus, pede est interdum lectus ligula sit, vel egestas volutpat aptent aliquam. Sed luctus egestas. Placerat turpis rutrum maecenas, sodales viverra ab, purus consectetuer ut tincidunt lobortis massa. Sit vel, duis mi metus et felis egestas, dis integer vitae, feugiat consectetuer elit, natoque lacus leo volutpat donec quam bibendum. Felis mauris.</div>
+                <div role="tabpanel" class="tab-pane" id="profile" >Nulla ipsum elit, eleifend sed. Fermentum sit, consequat commodo vel massa integer in wisi, quam libero, mollis tortor dapibus porttitor, euismod nonummy duis et rutrum et nibh. Ullamcorper in at, justo eu amet id sed, vel amet ut et velit velit, suscipit ultricies. Lectus quis proin sodales. Eu donec etiam vestibulum id lectus nascetur, mauris amet pellentesque posuere sit vitae, dolor consectetur nec varius, vitae sed quis dolor commodo lacus. Rhoncus platea risus omnis aenean, rhoncus nibh eget turpis eros enim, magna vestibulum enim minima habitant malesuada porttitor, nibh donec magna lorem nunc vitae.</div>
+                <div role="tabpanel" class="tab-pane" id="messages" >Diam vulputate interdum ac et eget, et interdum proin, nec aliquet a. Vitae lobortis elit morbi, pede mi nullam lacus magna consectetuer lobortis, hendrerit amet nulla et rutrum, et per a in, integer lectus nunc ac dignissim sit. Vestibulum dignissim placerat, sed arcu vitae, quis hac ultrices at, fringilla nullam ut. Tempor cursus quam sit, tempus iaculis enim dolor. Platea pede nullam quis, urna aut tellus est, nibh feugiat tristique metus nec viverra vestibulum, nulla et ut mauris dui. Neque tortor tristique, volutpat velit et. Ipsum sit tellus eos, morbi scelerisque suspendisse, luctus in animi nam diam, fusce metus morbi. Pretium lacus a phasellus, donec pede duis eget vestibulum in. Vivamus ac nullam feugiat quaerat pharetra.</div>
+                <div role="tabpanel" class="tab-pane" id="settings" >Elit in gravida a sem pellentesque sodales, cursus turpis turpis, vitae nec urna. Feugiat id ultricies interdum metus, felis wisi, ornare wisi orci proin amet lacinia adipiscing. Sollicitudin donec quis libero sit, euismod lorem ornare ante lacus hendrerit vitae, parturient aliquet pellentesque quam eu, eu hendrerit rhoncus odio, urna etiam ut purus. Nonummy elit ultricies saepe adipiscing nam quam, magna dis, molestie risus metus pretium nunc, et cras tempus dignissim duis arcu nec, mauris laboriosam suspendisse. In mi vivamus, tempor sit sed congue. A vehicula vel nulla hendrerit bibendum, metus pretium curabitur elementum at, pede congue sodales risus rutrum sed, vel imperdiet suspendisse recusandae conubia.</div>
+                <div role="tabpanel" class="tab-pane" id="about" >itae, parturient aliquet pellentesque quam eu, eu hendrerit rhoncus odio, urna etiam ut purus. Nonummy elit ultricies saepe adipiscing nam quam, magna dis, molestie risus metus pretium nunc, et cras tempus dignissim duis arcu nec, mauris laboriosam suspendisse. In mi vivamus, tempor sit sed congue. A vehicula vel nulla hendrerit bibendu.</div>
+                <div role="tabpanel" class="tab-pane" id="foryou" >Terdum proin, nec aliquet a. Vitae lobortis elit morbi, pede mi nullam lacus magna consectetuer lobortis, hendrerit amet nulla et rutrum, et per a in, integer lectus nunc ac dignissim sit. Vestibulum dignissim placerat, sed arcu vitae, quis hac ultrices at, fringilla nullam ut. Tempor cursus quam sit, tempus iaculis enim dolor. Platea pede nullam quis, urna aut tellus est, nibh feugiat tristique metus nec viverra vestibulum, nulla et ut mauris dui. Neque tortor tristique, volutpat velit et. Ipsum sit tellus eos, morbi scelerisque suspendisse, luctus in animi nam diam, fusce metus morbi. Pretium lacus a phasellus, donec pede duis eget vestibulum ac.</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/index.js"></script>
+</div>
+
+<iframe src="plane.html" id="viewer" name="viewer" scrolling="no">
+</iframe>
+
+
 
 </body>
 </html>
