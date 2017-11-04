@@ -4,7 +4,7 @@
   border-width: 5px;
   height:100%;
   font-family: 'Josefin Sans', sans-serif;
-  text-transform: captalize;
+  text-transform: capitalize;
   letter-spacing: 2px;
 }
 @media only screen and (min-width: 768px) {

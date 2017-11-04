@@ -47,6 +47,12 @@
             margin: 0;
             letter-spacing: -0.025em;
             color: darkgoldenrod;
+            text-shadow:
+                    3px 3px 0 #000,
+                    -1px -1px 0 #000,
+                    1px -1px 0 #000,
+                    -1px 1px 0 #000,
+                    1px 1px 0 #000;
         }
         .header h1 span {
             font-size: 0.2em;
@@ -54,6 +60,9 @@
             display: block;
             margin: 0 0 -1em 9em;
             letter-spacing: 0;
+            text-shadow:
+                    1px 1px 0 #000,
+                    1px 1px 0 #000;
         }
         .header {
             position: absolute;
@@ -96,7 +105,7 @@
         <div class="game-holder">
             <div class="header">
                 <h1><span>me</span>About</h1>
-            </div>
+    </div>
             <div class="world" id="world"></div>
             <div class="message message--replay" id="replayMessage">Click to resume</div>
         </div>

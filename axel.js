@@ -92,8 +92,6 @@ var ennemyHolderMeshPosition = -400;
 
 var colors = ["red", "purple", "green","blue","yellow","black"];
 
-var keyEnnemy1,keyEnnemy2,keyEnnemy3,keyEnnemy4;
-
 window.addEventListener('load', init, false);
 
 function init(event) {
@@ -104,7 +102,6 @@ function init(event) {
     createSky();
     createPlane();
     createEnnemies();
-    //createKey();
     createParticles();
     document.addEventListener('mousemove', handleMouseMove, false);
     document.addEventListener('click', clickToResume);
@@ -132,12 +129,6 @@ function loop() {
 
         airplane.propeller.rotation.x += 0.3;
         airplane.pilot.updateHairs();
-
-        /*keyEnnemy1.mesh.rotation.z += .1;
-        keyEnnemy2.mesh.rotation.z += .1;
-        keyEnnemy3.mesh.rotation.z += .1;
-        keyEnnemy4.mesh.rotation.z += .1;*/
-
 
         if (Math.floor(game.distance) % game.distanceForEnnemiesSpawn === 0 && Math.floor(game.distance) > game.ennemyLastSpawn && ennemiesInUse.length < 10) {
             game.ennemyLastSpawn = Math.floor(game.distance);
@@ -306,27 +297,6 @@ function createEnnemies() {
     scene.add(ennemiesHolder.mesh)
 }
 
-function createKey() {
-    keyEnnemy1 = new KeyEnnemy();
-    keyEnnemy1.mesh.position.y = 175;
-    keyEnnemy1.mesh.position.x = 150;
-
-    keyEnnemy2 = new KeyEnnemy();
-    keyEnnemy2.mesh.position.y = 175;
-    keyEnnemy2.mesh.position.x = 100;
-
-    keyEnnemy3 = new KeyEnnemy();
-    keyEnnemy3.mesh.position.y = 200;
-
-    keyEnnemy4 = new KeyEnnemy();
-    keyEnnemy4.mesh.position.y = 200;
-
-    scene.add(keyEnnemy1.mesh);
-    scene.add(keyEnnemy2.mesh);
-    scene.add(keyEnnemy3.mesh);
-    scene.add(keyEnnemy4.mesh);
-}
-
 function createParticles() {
     for (var i = 0; i < 10; i++) {
         var particle = new Particle();
@@ -407,21 +377,6 @@ Ennemy = function () {
     this.color = someRandomColor;
     this.mesh = new THREE.Mesh(geom, mat);
     this.mesh.castShadow = true;
-    this.angle = Math.PI / 2;
-    this.distance = 800;
-};
-
-KeyEnnemy = function () {
-    var someRandomColor = getRandomColor();
-    var geom = new THREE.TetrahedronGeometry(4, 2);
-    var mat = new THREE.MeshPhongMaterial({
-        color: someRandomColor,
-        shininess: 0,
-        specular: 0xffffff,
-        flatShading: THREE.FlatShading
-    });
-    this.color = someRandomColor;
-    this.mesh = new THREE.Mesh(geom, mat);
     this.angle = Math.PI / 2;
     this.distance = 800;
 };
