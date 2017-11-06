@@ -226,7 +226,7 @@ function createLights() {
     // A hemisphere light is a gradient colored light;
     // the first parameter is the sky color, the second parameter is the ground color,
     // the third parameter is the intensity of the light
-    hemisphereLight = new THREE.HemisphereLight(0xaaaaaa, 0x000000, .9)
+    hemisphereLight = new THREE.HemisphereLight(0xaaaaaa, 0x000000, .9);
 
     // A directional light shines from a specific direction.
     // It acts like the sun, that means that all the rays produced are parallel.

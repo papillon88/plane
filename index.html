@@ -10,14 +10,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
-        #panel{
+        #panel {
             position: fixed;
             right: 0;
             width: 35%;
             height: 100%;
             overflow: hidden;
         }
-        #viewer{
+
+        #viewer {
             position: absolute;
             border: 0;
             left: 0;
@@ -41,7 +42,7 @@
             }
             document.getElementById(tabColor).style.display = "block";
 
-            switch (tabColor){
+            switch (tabColor) {
                 case 'red' :
                     document.getElementById('red').className += " w3-red";
                     document.getElementById('red').click();
@@ -68,6 +69,7 @@
                     break;
             }
         }
+
         function openTabFromClick(tabColor) {
             var i, tablinks;
             tablinks = document.getElementsByClassName("tablink");
@@ -81,7 +83,7 @@
             }
             document.getElementById(tabColor).style.display = "block";
 
-            switch (tabColor){
+            switch (tabColor) {
                 case 'red' :
                     document.getElementById('red').className += " w3-red";
                     break;
@@ -108,9 +110,11 @@
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://use.fontawesome.com/aa95071b26.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -122,25 +126,133 @@
     <div id="body">
         <div class="out-wrap">
             <ul id="tabs" class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#home" id="red" aria-controls="home" role="tab" data-toggle="tab" class="tablink w3-red" onclick="openTabFromClick('red')">Home</a></li>
-                <li role="presentation"><a href="#profile" id="purple" aria-controls="profile" role="tab" data-toggle="tab" class="tablink" onclick="openTabFromClick('purple')">Profile</a></li>
-                <li role="presentation"><a href="#messages" id="green" aria-controls="messages" role="tab" data-toggle="tab" class="tablink" onclick="openTabFromClick('green')">Messages</a></li>
-                <li role="presentation"><a href="#settings" id="blue" aria-controls="settings" role="tab" data-toggle="tab" class="tablink" onclick="openTabFromClick('blue')">Settings</a></li>
-                <li role="presentation"><a href="#about" id="yellow" aria-controls="about" role="tab" data-toggle="tab" class="tablink" onclick="openTabFromClick('yellow')">About</a></li>
-                <li role="presentation"><a href="#foryou" id="black" aria-controls="foryou" role="tab" data-toggle="tab" class="tablink" onclick="openTabFromClick('black')">For You</a></li>
+                <li role="presentation" class="active"><a href="#home" id="red" aria-controls="home" role="tab"
+                                                          data-toggle="tab" class="tablink w3-red"
+                                                          onclick="openTabFromClick('red')">Home</a></li>
+                <li role="presentation"><a href="#profile" id="purple" aria-controls="profile" role="tab"
+                                           data-toggle="tab" class="tablink" onclick="openTabFromClick('purple')">Academia</a>
+                </li>
+                <li role="presentation"><a href="#messages" id="green" aria-controls="messages" role="tab"
+                                           data-toggle="tab" class="tablink" onclick="openTabFromClick('green')">Projects</a>
+                </li>
+                <li role="presentation"><a href="#settings" id="blue" aria-controls="settings" role="tab"
+                                           data-toggle="tab" class="tablink" onclick="openTabFromClick('blue')">WORK
+                    EXP</a></li>
+                <li role="presentation"><a href="#about" id="yellow" aria-controls="about" role="tab" data-toggle="tab"
+                                           class="tablink" onclick="openTabFromClick('yellow')">HOBBIES</a></li>
+                <li role="presentation"><a href="#foryou" id="black" aria-controls="foryou" role="tab" data-toggle="tab"
+                                           class="tablink" onclick="openTabFromClick('black')">CONTACT</a></li>
             </ul>
 
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="home">
-                    Hey there ! <br>
-                    Nulla ipsum elit, eleifend sed. Fermentum sit, consequat commodo vel massa integer in wisi, quam libero, mollis tortor dapibus porttitor, euismod nonummy duis et rutrum et nibh. Ullamcorper in at, justo eu amet id sed, vel amet ut et velit velit, suscipit ultricies. Lectus quis proin sodales. Eu donec etiam vestibulum id lectus nascetur, mauris amet pellentesque posuere sit vitae, dolor consectetur nec varius, vitae sed quis dolor commodo lacus. Rhoncus platea risus omnis aenean, rhoncus nibh eget turpis eros enim, magna vestibulum enim minima habitant malesuada porttitor, nibh donec magna lorem nunc vitae.
+                    <h3>Hey there !</h3> <br>
+                    My name is <b>Debaspreet Chowhdury</b>. This is my first attempt at learning three.js/web GL.
+                    So I thought it would be cool to wrap the learnings into a personal portfolio website.<br><br>
+                    To navigate around, you can either smash the colored orbs with the airplane OR use the menu above OR
+                    use a combination of both.<br><br>
+                    Each colored orb corresponds to the same colored menu tab. <br><br>
+                    <h3 style="text-align: right">Cheers !</h3>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="profile">
+                    <p>I recently completed my <b>Masters</b> in Telecommunication Engineering with specialization in
+                        Computer Science from
+                        <a href="https://www.utdallas.edu/" target="_blank"><b>The University of Texas at Dallas</b></a>.
+                        Following is a part of the coursework that I enjoyed taking and doing the projects in : <br><br>
+                        <a href="http://utdallas.edu/~ksarac/netsec/index.htm" target="_blank">Network Security,</a>
+                        <a href="http://www.utdallas.edu/~muratk/courses/db08.htm" target="_blank">Database Design,</a>
+                        <a href="http://utdallas.edu/~ksarac/netsec/index.htm" target="_blank">Design and Analysis of
+                            Computer Algorithms,</a>
+                        <a href="http://www.utdallas.edu/~praba/cs6378.html" target="_blank">Distributed Systems and
+                            Advanced Operating Systems,</a>
+                        <a href="http://www.utdallas.edu/~jjue/cs6352/" target="_blank">Performance of Computer Systems
+                            and Networks,</a>
+                        <a href="http://www.utdallas.edu/~ksarac/acn/index.htm" target="_blank">Advanced Computer
+                            Networks</a><br><br>
+
+                        I did my <b>Bachelors</b> in Electronics and Communications Engineering from
+                        <a href="https://manipal.edu/mit.html" target="_blank"><b>Manipal Institute of
+                            Technology,India</b></a>.
+                    </p>
 
                 </div>
-                <div role="tabpanel" class="tab-pane" id="profile" >Nulla ipsum elit, eleifend sed. Fermentum sit, consequat commodo vel massa integer in wisi, quam libero, mollis tortor dapibus porttitor, euismod nonummy duis et rutrum et nibh. Ullamcorper in at, justo eu amet id sed, vel amet ut et velit velit, suscipit ultricies. Lectus quis proin sodales. Eu donec etiam vestibulum id lectus nascetur, mauris amet pellentesque posuere sit vitae, dolor consectetur nec varius, vitae sed quis dolor commodo lacus. Rhoncus platea risus omnis aenean, rhoncus nibh eget turpis eros enim, magna vestibulum enim minima habitant malesuada porttitor, nibh donec magna lorem nunc vitae.</div>
-                <div role="tabpanel" class="tab-pane" id="messages" >Diam vulputate interdum ac et eget, et interdum proin, nec aliquet a. Vitae lobortis elit morbi, pede mi nullam lacus magna consectetuer lobortis, hendrerit amet nulla et rutrum, et per a in, integer lectus nunc ac dignissim sit. Vestibulum dignissim placerat, sed arcu vitae, quis hac ultrices at, fringilla nullam ut. Tempor cursus quam sit, tempus iaculis enim dolor. Platea pede nullam quis, urna aut tellus est, nibh feugiat tristique metus nec viverra vestibulum, nulla et ut mauris dui. Neque tortor tristique, volutpat velit et. Ipsum sit tellus eos, morbi scelerisque suspendisse, luctus in animi nam diam, fusce metus morbi. Pretium lacus a phasellus, donec pede duis eget vestibulum in. Vivamus ac nullam feugiat quaerat pharetra.</div>
-                <div role="tabpanel" class="tab-pane" id="settings" >Elit in gravida a sem pellentesque sodales, cursus turpis turpis, vitae nec urna. Feugiat id ultricies interdum metus, felis wisi, ornare wisi orci proin amet lacinia adipiscing. Sollicitudin donec quis libero sit, euismod lorem ornare ante lacus hendrerit vitae, parturient aliquet pellentesque quam eu, eu hendrerit rhoncus odio, urna etiam ut purus. Nonummy elit ultricies saepe adipiscing nam quam, magna dis, molestie risus metus pretium nunc, et cras tempus dignissim duis arcu nec, mauris laboriosam suspendisse. In mi vivamus, tempor sit sed congue. A vehicula vel nulla hendrerit bibendum, metus pretium curabitur elementum at, pede congue sodales risus rutrum sed, vel imperdiet suspendisse recusandae conubia.</div>
-                <div role="tabpanel" class="tab-pane" id="about" >itae, parturient aliquet pellentesque quam eu, eu hendrerit rhoncus odio, urna etiam ut purus. Nonummy elit ultricies saepe adipiscing nam quam, magna dis, molestie risus metus pretium nunc, et cras tempus dignissim duis arcu nec, mauris laboriosam suspendisse. In mi vivamus, tempor sit sed congue. A vehicula vel nulla hendrerit bibendu.</div>
-                <div role="tabpanel" class="tab-pane" id="foryou" >Terdum proin, nec aliquet a. Vitae lobortis elit morbi, pede mi nullam lacus magna consectetuer lobortis, hendrerit amet nulla et rutrum, et per a in, integer lectus nunc ac dignissim sit. Vestibulum dignissim placerat, sed arcu vitae, quis hac ultrices at, fringilla nullam ut. Tempor cursus quam sit, tempus iaculis enim dolor. Platea pede nullam quis, urna aut tellus est, nibh feugiat tristique metus nec viverra vestibulum, nulla et ut mauris dui. Neque tortor tristique, volutpat velit et. Ipsum sit tellus eos, morbi scelerisque suspendisse, luctus in animi nam diam, fusce metus morbi. Pretium lacus a phasellus, donec pede duis eget vestibulum ac.</div>
+
+                <div role="tabpanel" class="tab-pane" id="messages">
+                    <p>
+                        I have used the <a
+                            href="https://docs.google.com/document/d/1W54caDO4RC8vhMW2ZFw_d__0MjRso0KtFzWB3YDxq-E/edit?usp=sharing"
+                            target="_blank">
+                        <b>Java ecosystem</b> </a>for most of web and desktop development and <a
+                            href="https://docs.google.com/document/d/1W54caDO4RC8vhMW2ZFw_d__0MjRso0KtFzWB3YDxq-E/edit?usp=sharing"
+                            target="_blank">
+                        <b>Python ecosystem</b></a>
+                        for graph algorithm related projects and Apache Spark.
+                        Following are some of the projects :<br><br>
+                    <div style="font-size: small">
+                        <a href="https://github.com/papillon88/Multithreading" target="_blank">chandy-lamport distributed system</a>,
+                        <a href="https://github.com/papillon88/recipe" target="_blank">recipe management webapp with unit and integration tests</a>,
+                    <a href="https://github.com/papillon88/Multithreading" target="_blank">suzuki mutual exclusion ds</a>,
+                    <a href="https://github.com/papillon88/Multithreading" target="_blank">rt mutex in ds</a>,
+                        <a href="https://github.com/papillon88/LibraryConsole" target="_blank"> library management GUI console web app</a>,
+                        <a href="https://github.com/papillon88/DavisbaseLite" target="_blank"> database engine like MySQL</a>,
+                        <a href="https://github.com/papillon88/sustlabi" target="_blank">tesseract OCR solution to energy metering</a>,
+                        <a href="https://github.com/papillon88/restappAdv" target="_blank"> RESTFUL app with HAOETAS</a>,
+                        <a href="https://github.com/papillon88/productManagement" target="_blank">product management front end console</a>,
+                        <a href="https://github.com/papillon88/plane" target="_blank">three.js website</a>,
+                        <a href="https://github.com/papillon88/qtproj1" target="_blank">path listor</a>,
+                        <a href="https://github.com/papillon88/SIP_project" target="_blank">SIP trunk</a>,
+                        <a href="https://github.com/papillon88/Batch_Processor_Project_1" target="_blank"> batch processor</a>,
+                        <a href="https://github.com/papillon88/DataStore_Project_3" target="_blank"> persistence storage</a>,
+                        <a href="https://github.com/papillon88/Task_Executor_Project_2" target="_blank">task executor</a>,
+                        <a href="https://github.com/papillon88/Projects_Algos_for_telecom_nets" target="_blank">algorithmic aspects of telecom nets</a>
+                    </div>
+
+
+                    </p>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="settings">
+                    Resume in the
+                    <a href="#foryou" id="black" aria-controls="foryou" role="tab" data-toggle="tab" class="tablink"
+                       onclick="openTabFromClick('black')"><b>contact</b></a> tab.<br><br>
+                    While pursuing my masters degree, I was involved with <a href="https://www.sustlabs.com/"
+                                                                             target="_blank">
+                    <b>Sustlabs</b></a> in rapid prototyping of an OCR based cloud native open source solution
+                    to electric and gas meter readings in an angile setup. Before that, I worked with <a
+                        href="http://www.goldmansachs.com/index.html" target="_blank">
+                    <b>Goldman Sachs</b></a>
+                    on report migrations and development of a full stack web solution for script execution.
+                    Prior to that My work at
+                    <a href="https://www.ericsson.com/en" target="_blank"><b>Ericsson</b></a>
+                    included dealing with perl, bash and legacy scripts in a linux environment for network
+                    configuration,integration and migration.
+                    At <a href="https://www.tcs.com/" target="_blank"><b>TCS</b></a> I integrated SAP, Oracle & Windows
+                    system for the client Johnson & Johnson using WebMethods.
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="about">
+                    Nowadays any spare time I have goes into youtubing,<b>oil painting</b>,playing <b>violin</b>, paying
+                    the swan chromatic <b>harmonica</b> I have,
+                    <b>cooking</b> various cuisines , <b>baking</b>, talking to <b>friends</b>, daydreaming and
+                    listening
+                    to <b>psybient</b> music. My recent fascination are the various block chain <b>crypto currencies</b>.
+                    I believe that <b>AR</b> is more powerful than <b>VR</b>.
+                    In the past I have mused over books,video games, body building and philosophy.
+                    I do <b>yoga</b> and <b>reiki</b> on a daily basis.
+                    I believe some degree of <b>spiritualism</b> in life Keeps mind balanced and fosters steady growth
+                    in any society.
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="foryou">
+                    <br>
+                    <h5>Download Resume</h5><br>
+                    <h5>devopreet.ch@gmail.com</h5><br><br>
+                    <a href="https://github.com/papillon88" target="_blank"><h4>Github</h4><br></a>
+                    <a href="https://stackoverflow.com/users/2304316/papillon88" target="_blank"><h4>Stack Overflow</h4>
+                        <br></a>
+                    <a href="https://www.linkedin.com/in/debaspreet/" target="_blank"><h4>LinkedIn</h4><br></a>
+                </div>
             </div>
         </div>
     </div>
